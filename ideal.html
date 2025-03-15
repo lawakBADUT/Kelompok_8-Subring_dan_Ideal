@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Makalah mengenai konsep subring dan ideal dalam teori aljabar" />
+  <meta name="author" content="Kelompok 8 - PSPM D 2022" />
+  <title>Makalah Subring dan Ideal</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Core theme CSS (includes Bootstrap) -->
+  <link href="css/styles.css" rel="stylesheet" />
+  <!-- MathJax Configuration -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .bg-blue {
+      background-color: #0D253F;
+    }
+    .falling-symbol {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      color: #fff;
+      user-select: none;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    p { font-size: 1.2rem; margin-bottom: 1rem; }
+    hr { width: 100%; }
+    .navbar-nav .nav-item { margin-right: 10px; }
+    .navbar-nav .nav-link {
+      position: relative;
+      padding-bottom: 5px;
+    }
+    .navbar-nav .nav-link:hover::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    header { background-color: #0D253F; padding: 20px 0; }
+    .header-content { text-align: center; color: white; }
+    .table-container { display: flex; justify-content: center; margin-top: 10px; }
+    .custom-table { width: 50%; background: transparent; color: white; border-collapse: collapse; }
+    .custom-table td { padding: 5px; text-align: left; }
+    .custom-table td:last-child { text-align: right; }
+    .navbar-nav .nav-link.active { font-weight: bold; color: #fff; }
+    .navbar-nav .nav-link.active::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    @media (max-width: 900px) {
+      .container-konten { margin-left: 1rem; margin-right: 1rem; }
+    }
+    .math {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #f0f0f0;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+    .card-text { font-size: 1.1rem; }
+  </style>
+</head>
+<body id="page-top">
+  <!-- Header-->
+  <header class="bg-gradient text-white">
+    <div class="container px-4 header-content" id="headerContent">
+      <!-- Header Minimal: selalu tampil -->
+      <div class="header-minimal" id="headerMinimal" style="cursor: pointer;">
+        <h1 class="fw-bolder">STRUKTUR ALJABAR</h1>
+        <h2 class="fw-bolder">Subring dan Ideal</h2>
+        <hr>
+      </div>
+      <!-- Header Ekstra: informasi tambahan -->
+      <div class="extra-content">
+        <p class="lead">Dosen Pengampu: <br>Ade Andriani, S.Pd., M.Pd.</p>
+        <p class="lead" style="padding-top: 1rem;">Kelompok 8 - PSPM D 2022</p>
+        <p>Rona Uli Siringo ringo (4223311055)</p>
+        <p>Ingrid Simangunsong (4223311041)</p>
+        <p>Miranda Br Purba (4223311044)</p>
+      </div>
+    </div>
+  </header>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+    <div class="container px-4">
+      <a class="navbar-brand" href="/">Subring dan Ideal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="/subring.html">Subring</a></li>
+          <li class="nav-item"><a class="nav-link" href="/spsl.html" id="pembagian">Pembagian & Lapangan</a></li>
+          <li class="nav-item"><a class="nav-link" href="/sifat_spsl.html" id="sifat">Sifat Subring</a></li>
+          <li class="nav-item"><a class="nav-link" href="/ideal.html">Ideal</a></li>
+          <li class="nav-item"><a class="nav-link" href="/penutup.html">Penutup</a></li>
+          <li class="nav-item"><a class="nav-link" href="/video.html">Video</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content: Ideal -->
+  <section id="ideal" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">IDEAL</h2>
+      <div class="container-konten">
+        <!-- Pengantar -->
+        <p style="text-align: justify;"> Ideal dalam ring adalah subhimpunan khusus yang memenuhi sifat tertutup terhadap operasi pengurangan dan perkalian dengan elemen ring. Konsep ini berperan penting dalam teori aljabar, terutama dalam struktur subring dan pembentukan lapangan. </p>
+        <!-- Card: Definisi D-1 (Ideal) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Definisi D-1: Konsep Ideal</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Sebuah subring \( N \) dari ring \( R \) dikatakan sebagai <em>ideal</em> apabila memenuhi kondisi-kondisi sebagai berikut:
+              <ul>
+                <li><strong>Ideal Kiri:</strong> Untuk setiap elemen \( r \in R \) dan setiap elemen \( n \in N \), hasil perkalian \( rn \) harus berada dalam \( N \).</li>
+                <li><strong>Ideal Kanan:</strong> Untuk setiap elemen \( r \in R \) dan setiap elemen \( n \in N \), hasil perkalian \( nr \) harus berada dalam \( N \).</li>
+              </ul>
+              Apabila subring \( N \) memenuhi kedua syarat di atas, maka \( N \) disebut sebagai <em>ideal dua sisi</em>. Perlu dicatat bahwa setiap ring secara inheren memiliki setidaknya dua ideal, yaitu \( \{0\} \) dan \( R \) itu sendiri; ideal-ideal lain yang bukan ideal trivial tersebut disebut sebagai <em>ideal sejati</em>.
+            </p>
+          </div>
+        </div>
+        <!-- Card: Teorema D-1 (Kriteria Ideal) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Teorema D-1: Kriteria Pengenalan Ideal</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Suatu himpunan bagian \( N \subseteq R \) merupakan ideal dari ring \( R \) jika dan hanya jika memenuhi dua kriteria utama berikut:
+              <ol>
+                <li>Untuk setiap \( a, b \in N \), selisih \( a - b \) juga merupakan elemen dari \( N \).</li>
+                <li>Untuk setiap \( n \in N \) dan setiap \( r \in R \), hasil perkalian \( rn \) dan \( nr \) selalu berada dalam \( N \).</li>
+              </ol>
+            </p>
+            <p class="card-text text-justify">
+              <strong>Bukti:</strong><br>
+              Karena \( N \) merupakan subring dari \( R \) dan tertutup terhadap operasi pengurangan serta perkalian dengan sembarang elemen \( R \), maka \( N \) memenuhi definisi ideal sebagaimana telah dijelaskan.
+            </p>
+          </div>
+        </div>
+        <!-- Card: Contoh 1 (Ideal Kiri) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Contoh 1: Ideal Kiri</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Pertimbangkan himpunan matriks segitiga bawah berikut:
+              \[
+              N = \left\{ \begin{pmatrix} a & 0 \\ b & 0 \end{pmatrix} \,\bigg|\, a,\, b \in \mathbb{Z} \right\}.
+              \]
+              Himpunan \( N \) tersebut merupakan contoh ideal kiri dari ring \( M_2(\mathbb{Z}) \), yaitu ring yang terdiri atas semua matriks berordo 2×2 dengan entri-entri bilangan bulat.
+            </p>
+            <p class="card-text text-justify">
+              <strong>Bukti:</strong><br>
+              Misalkan \( A = \begin{pmatrix} 2 & 0 \\ 3 & 0 \end{pmatrix} \in N \) dan \( B = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \in R \). Maka,
+              \[
+              BA = \begin{pmatrix} 2 & 4 \\ 3 & 6 \end{pmatrix}.
+              \]
+              Karena matriks hasil perkalian tersebut tidak termasuk dalam \( N \), dapat disimpulkan bahwa \( N \) tidak memenuhi syarat sebagai ideal kanan.
+            </p>
+          </div>
+        </div>
+        <!-- Card: Teorema D-2 (Operasi pada Ideal) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Teorema D-2: Operasi-operasi pada Ideal</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Diberikan dua ideal \( M \) dan \( N \) dalam ring \( R \), maka kedua operasi berikut menghasilkan ideal baru:
+              <ol>
+                <li><strong>Irisan Ideal:</strong> Himpunan \( M \cap N \) merupakan ideal dari \( R \) karena sifat tertutup terhadap operasi pengurangan dan perkalian dengan elemen \( R \).</li>
+                <li><strong>Jumlah Ideal:</strong> Himpunan
+                  \[
+                  M + N = \{ m + n \mid m \in M,\, n \in N \}
+                  \]
+                  juga merupakan ideal dari \( R \).
+                </li>
+              </ol>
+            </p>
+            <p class="card-text text-justify">
+              <strong>Bukti:</strong><br>
+              Karena masing-masing \( M \) dan \( N \) telah memenuhi properti ideal secara individual, maka operasi irisan dan penjumlahan keduanya secara alami mempertahankan sifat-sifat penutupan yang diperlukan untuk menjadi ideal.
+            </p>
+          </div>
+        </div>
+        <!-- Card: Teorema D-3 (Ideal Principal) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Teorema D-3: Ideal Principal</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Untuk sebuah ring komutatif \( R \) dan setiap elemen \( a \in R \), himpunan
+              \[
+              N = \{ ra \mid r \in R \}
+              \]
+              merupakan ideal terkecil yang mengandung \( a \). Ideal yang dihasilkan oleh suatu elemen seperti ini dikenal sebagai <em>ideal principal</em>.
+            </p>
+            <p class="card-text text-justify">
+              <strong>Contoh:</strong><br>
+              Pada ring \( \mathbb{Z}_4 \), ideal \( N_2 = \{ 0, 2 \} \) merupakan ideal yang dihasilkan oleh elemen 2, sehingga dapat dituliskan sebagai \( 2\mathbb{Z}_4 \).
+            </p>
+          </div>
+        </div>
+        <!-- Card: Definisi D-3 (Ideal Prima & Maksimal) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Definisi D-3: Ideal Prima dan Ideal Maksimal</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Definisi kedua jenis ideal ini adalah sebagai berikut:
+              <ul>
+                <li><strong>Ideal Prima:</strong> Suatu ideal sejati \( N \) dikatakan <em>ideal prima</em> apabila untuk setiap pasangan elemen \( x, y \in R \), jika perkalian \( xy \in N \) maka minimal salah satu dari \( x \) atau \( y \) harus berada dalam \( N \).</li>
+                <li><strong>Ideal Maksimal:</strong> Suatu ideal sejati \( N \) disebut <em>ideal maksimal</em> apabila tidak terdapat ideal lain \( M \) yang memenuhi hubungan inklusi \( N \subsetneq M \subsetneq R \). Dengan kata lain, \( N \) adalah ideal terbesar yang bukan merupakan keseluruhan ring \( R \).</li>
+              </ul>
+            </p>
+            <p class="card-text text-justify">
+              <strong>Contoh:</strong><br>
+              Pada ring \( \mathbb{Z} \), ideal \( p\mathbb{Z} \) merupakan contoh ideal prima apabila \( p \) adalah bilangan prima.
+            </p>
+          </div>
+        </div>
+        <!-- Card: Akibat D-4 (Lapangan tidak Memiliki Ideal Sejati) -->
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header bg-blue text-white">
+            <h5 class="mb-0">Akibat D-4: Ketiadaan Ideal Sejati pada Lapangan</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text text-justify">
+              Dalam suatu lapangan \( F \), tidak terdapat ideal sejati. Hal ini disebabkan oleh fakta bahwa jika \( N \) adalah sebuah ideal dalam \( F \) dan \( N \neq \{0\} \), maka pasti terdapat elemen satu \( 1 \) dalam \( N \). Karena setiap elemen dalam lapangan memiliki invers perkalian, kehadiran \( 1 \) memaksa seluruh elemen \( F \) untuk juga berada di \( N \), sehingga \( N = F \).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container px-4" style="margin-top: -2rem; margin-bottom: -2rem;">
+      <p class="m-0 text-center text-white">© Kelompok 8 - PSPM D 2022 <br>Struktur Aljabar - Subring dan Ideal</p>
+    </div>
+  </footer>
+  <!-- Bootstrap core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS -->
+  <script src="js/scripts.js"></script>
+  <script>
+    // Fungsi untuk mengubah teks menu berdasarkan ukuran layar
+    function updateMenuText() {
+      const pembagian = document.getElementById('pembagian');
+      const sifat = document.getElementById('sifat');
+      if (window.innerWidth <= 990) {
+        pembagian.textContent = 'Subring Pembagian dan Sub Lapangan';
+        sifat.textContent = 'Sifat-sifat Subring dan Sublapangan';
+      } else {
+        pembagian.textContent = 'Pembagian & Lapangan';
+        sifat.textContent = 'Sifat Subring';
+      }
+    }
+    window.addEventListener('resize', updateMenuText);
+    updateMenuText();
+  </script>
+  <script>
+    // Daftar simbol matematika untuk efek animasi
+    const mathSymbols = ["π", "∑", "√", "∞", "∆", "∫", "≈", "≠", "λ", "θ"];
+  
+    function createFallingSymbol() {
+      const symbol = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+      const span = document.createElement('span');
+      span.classList.add('falling-symbol');
+      span.textContent = symbol;
+      span.style.left = Math.random() * window.innerWidth + "px";
+      span.style.fontSize = (20 + Math.random() * 10) + "px";
+      span.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(span);
+      setTimeout(() => { span.remove(); }, parseFloat(span.style.animationDuration) * 1000);
+    }
+    setInterval(createFallingSymbol, 300);
+  </script>
+</body>
+</html>

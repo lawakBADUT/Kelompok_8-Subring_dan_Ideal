@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Makalah Subring dan Ideal</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .bg-blue {
+            background-color: #0D253F;
+        }
+        .falling-symbol {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            color: #fff;
+            user-select: none;
+            pointer-events: none;
+            animation-name: fall;
+            animation-timing-function: linear;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        p { font-size: 1.2rem; margin-bottom: 1px; }
+        hr { width: 100%; }
+        .navbar-nav .nav-item { margin-right: 10px; }
+        .navbar-nav .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .navbar-nav .nav-link:hover::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        header { background-color: #0D253F; padding: 20px 0; }
+        .header-content { text-align: center; color: white; }
+        .table-container { display: flex; justify-content: center; margin-top: 10px; }
+        .custom-table { width: 50%; background: transparent; color: white; border-collapse: collapse; }
+        .custom-table td { padding: 5px; text-align: left; }
+        .custom-table td:last-child { text-align: right; }
+        .navbar-nav .nav-link.active { font-weight: bold; color: #fff; }
+        .navbar-nav .nav-link.active::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        @media (max-width: 900px) {
+            .container-konten { margin-left: 1rem; margin-right: 1rem; }
+        }
+        .math {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+        }
+        .card-text { font-size: 1.1rem; }
+    </style>
+</head>
+<body id="page-top">
+ <!-- Header-->
+ <header class="bg-gradient text-white">
+    <div class="container px-4 header-content" id="headerContent">
+      <!-- Header Minimal: selalu tampil -->
+      <div class="header-minimal" id="headerMinimal" style="cursor: pointer;">
+        <h1 class="fw-bolder">STRUKTUR ALJABAR</h1>
+        <h2 class="fw-bolder">Subring dan Ideal</h2>
+        <hr>
+      </div>
+      <!-- Header Ekstra: informasi tambahan -->
+      <div class="extra-content">
+        <p class="lead">Dosen Pengampu: <br>Ade Andriani, S.Pd., M.Pd.</p>
+        <p class="lead" style="padding-top: 1rem;">Kelompok 8 - PSPM D 2022</p>
+        <p>Rona Uli Siringo ringo (4223311055)</p>
+        <p>Ingrid Simangunsong (4223311041)</p>
+        <p>Miranda Br Purba (4223311044)</p>
+      </div>
+    </div>
+  </header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+        <div class="container px-4">
+            <a class="navbar-brand" href="/">Subring dan Ideal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subring.html">Subring</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/spsl.html" id="pembagian">Pembagian & Lapangan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sifat_spsl.html" id="sifat">Sifat Subring</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/ideal.html">Ideal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/penutup.html">Penutup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/video.html">Video</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content: Sifat-Sifat Subring dan Sublapangan -->
+    <section id="sifat-subring" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">SIFAT-SIFAT SUBRING DAN SUBLAPANGAN</h2>
+            <div class="container-konten">
+<p style="text-align: justify;">Seperti halnya dengan subgroup, hal yang menyangkut irisan berlaku untuk subring
+    maupun sublapangan. Berikut ini teorema-teorema yang menyatakan hal itu.</p>
+    <br>
+                <!-- Teorema C-1: Irisan Subring -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Teorema C-1 (Irisan Subring)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            Jika \( S \) dan \( T \) masing-masing subring dari \( R \), maka \( S \cap T \) merupakan subring dari \( R \).
+                        </p>
+                        <p class="card-text text-justify">
+                            <strong>Bukti:</strong><br>
+                            Karena \( 0 \in S \) dan \( 0 \in T \), maka \( 0 \in S \cap T \). Ambil sembarang \( x, y \in S \cap T \). Karena \( S \) dan \( T \) subring:
+                            \[
+                            x - y \in S \cap T \quad \text{dan} \quad x \cdot y \in S \cap T
+                            \]
+                            sehingga \( S \cap T \) memenuhi kriteria subring.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Teorema C-2: Irisan Sublapangan -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Teorema C-2 (Irisan Sublapangan)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            Jika \( S \) dan \( T \) sublapangan dari lapangan \( F \), maka \( S \cap T \) juga merupakan sublapangan.
+                        </p>
+                        <p class="card-text text-justify">
+                            <strong>Bukti:</strong><br>
+                            \( S \cap T \) tertutup terhadap:
+                            <ul>
+                                <li><strong>Penjumlahan & Perkalian:</strong> Untuk \( a, b \in S \cap T \):
+                                    \[
+                                    a + b \in S \cap T \quad \text{dan} \quad a \cdot b \in S \cap T
+                                    \]
+                                </li>
+                                <li><strong>Invers Penjumlahan:</strong> Untuk \( a \in S \cap T \):
+                                    \[
+                                    -a \in S \cap T
+                                    \]
+                                </li>
+                                <li><strong>Invers Perkalian:</strong> Untuk \( a \neq 0 \in S \cap T \):
+                                    \[
+                                    a^{-1} \in S \cap T
+                                    \]
+                                </li>
+                            </ul>
+                            Juga mengandung elemen identitas \( 0 \) dan \( 1 \).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Teorema C-3: Irisan Koleksi Sublapangan -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Teorema C-3 (Irisan Koleksi Sublapangan)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            Irisan suatu koleksi sublapangan dari lapangan \( F \) juga merupakan lapangan.
+                        </p>
+                        <p class="card-text text-justify">
+                            <strong>Bukti:</strong><br>
+                            Misalkan \( a, b \in F \) dengan \( ab = 0 \). Jika \( a \neq 0 \), maka:
+                            \[
+                            a^{-1}(ab) = b = 0
+                            \]
+                            Dengan cara serupa, jika \( b \neq 0 \), maka \( a = 0 \). Jadi, irisan koleksi sublapangan tidak memiliki pembagi nol.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Teorema C-4: Unsur Kesatuan sebagai Pembagi Nol -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Teorema C-4 (Unsur Kesatuan sebagai Pembagi Nol)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            Jika \( S \) adalah subring dari ring \( R \) (tanpa unsur kesatuan) dan \( S \) memiliki unsur kesatuan \( 1_S \), maka \( 1_S \) adalah pembagi nol sejati.
+                        </p>
+                        <p class="card-text text-justify">
+                            <strong>Bukti:</strong><br>
+                            Karena \( R \) tidak memiliki kesatuan, terdapat \( b \in R \) sehingga:
+                            \[
+                            1_S \cdot b = 0 \quad \text{dan} \quad b \cdot 1_S = 0
+                            \]
+                            Hal ini membuktikan \( 1_S \) adalah pembagi nol.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container px-4" style="margin-top: -2rem; margin-bottom: -2rem;">
+        <p class="m-0 text-center text-white">© Kelompok 8 - PSPM D 2022 <br>Struktur Aljabar - Subring dan Ideal</p>
+    </div>
+</footer>
+<!-- Bootstrap core JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS -->
+<script src="js/scripts.js"></script>
+<script>
+    // Simpan teks awal dan teks panjang
+    let pembagianText = 'Pembagian & Lapangan';
+    let pembagianFullText = 'Subring Pembagian dan Sub Lapangan';
+    let sifatText = 'Sifat Subring';
+    let sifatFullText = 'Sifat-sifat Subring dan Sublapangan';
+
+    // Ambil elemen
+    let pembagian = document.getElementById('pembagian');
+    let sifat = document.getElementById('sifat');
+
+    // Set atribut title untuk tooltip
+    pembagian.setAttribute('title', pembagianText);
+    sifat.setAttribute('title', sifatText);
+
+    // Fungsi untuk mengubah teks berdasarkan ukuran layar
+    function updateMenuText() {
+        if (window.innerWidth <= 990) {
+            pembagian.textContent = pembagianFullText;
+            sifat.textContent = sifatFullText;
+        } else {
+            pembagian.textContent = pembagianText;
+            sifat.textContent = sifatText;
+        }
+    }
+
+    // Event listener untuk resize window
+    window.addEventListener('resize', updateMenuText);
+
+    // Set default teks saat halaman pertama kali dimuat
+    updateMenuText();
+
+    // Hover event hanya jika ukuran layar lebih dari 990px
+    if (window.innerWidth > 990) {
+        pembagian.addEventListener('mouseover', function () {
+            this.textContent = pembagianFullText;
+        });
+        pembagian.addEventListener('mouseout', function () {
+            this.textContent = pembagianText;
+        });
+        sifat.addEventListener('mouseover', function () {
+            this.textContent = sifatFullText;
+        });
+        sifat.addEventListener('mouseout', function () {
+            this.textContent = sifatText;
+        });
+    }
+</script>
+<script>
+    // Daftar simbol matematika
+    const mathSymbols = ["π", "∑", "√", "∞", "∆", "∫", "≈", "≠", "λ", "θ"];
+  
+    function createFallingSymbol() {
+        const symbol = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+        const span = document.createElement('span');
+        span.classList.add('falling-symbol');
+        span.textContent = symbol;
+        span.style.left = Math.random() * window.innerWidth + "px";
+        span.style.fontSize = (20 + Math.random() * 10) + "px";
+        span.style.animationDuration = (5 + Math.random() * 5) + "s";
+        document.body.appendChild(span);
+        setTimeout(() => { span.remove(); }, parseFloat(span.style.animationDuration) * 1000);
+    }
+    setInterval(createFallingSymbol, 300);
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Makalah mengenai konsep subring dan ideal dalam teori aljabar" />
+  <meta name="author" content="Kelompok 8 - PSPM D 2022" />
+  <title>Makalah Subring dan Ideal</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Core theme CSS (includes Bootstrap) -->
+  <link href="css/styles.css" rel="stylesheet" />
+  <!-- MathJax Configuration -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    .bg-blue {
+      background-color: #0D253F;
+    }
+    .falling-symbol {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      color: #fff;
+      user-select: none;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+    p { font-size: 1.2rem; margin-bottom: 1rem; }
+    hr { width: 100%; }
+    .navbar-nav .nav-item { margin-right: 10px; }
+    .navbar-nav .nav-link {
+      position: relative;
+      padding-bottom: 5px;
+    }
+    .navbar-nav .nav-link:hover::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    header { background-color: #0D253F; padding: 20px 0; }
+    .header-content { text-align: center; color: white; }
+    .table-container { display: flex; justify-content: center; margin-top: 10px; }
+    .custom-table { width: 50%; background: transparent; color: white; border-collapse: collapse; }
+    .custom-table td { padding: 5px; text-align: left; }
+    .custom-table td:last-child { text-align: right; }
+    .navbar-nav .nav-link.active { font-weight: bold; color: #fff; }
+    .navbar-nav .nav-link.active::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: white;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+    @media (max-width: 900px) {
+      .container-konten { margin-left: 1rem; margin-right: 1rem; }
+    }
+    .math {
+      font-family: "Courier New", Courier, monospace;
+      background-color: #f0f0f0;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+    .card-text { font-size: 1.1rem; }
+  </style>
+</head>
+<body id="page-top">
+  <!-- Header-->
+  <header class="bg-gradient text-white">
+    <div class="container px-4 header-content" id="headerContent">
+      <!-- Header Minimal: selalu tampil -->
+      <div class="header-minimal" id="headerMinimal" style="cursor: pointer;">
+        <h1 class="fw-bolder">STRUKTUR ALJABAR</h1>
+        <h2 class="fw-bolder">Subring dan Ideal</h2>
+        <hr>
+      </div>
+      <!-- Header Ekstra: informasi tambahan -->
+      <div class="extra-content">
+        <p class="lead">Dosen Pengampu: <br>Ade Andriani, S.Pd., M.Pd.</p>
+        <p class="lead" style="padding-top: 1rem;">Kelompok 8 - PSPM D 2022</p>
+        <p>Rona Uli Siringo ringo (4223311055)</p>
+        <p>Ingrid Simangunsong (4223311041)</p>
+        <p>Miranda Br Purba (4223311044)</p>
+      </div>
+    </div>
+  </header>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+    <div class="container px-4">
+      <a class="navbar-brand" href="/">Subring dan Ideal</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="/subring.html">Subring</a></li>
+          <li class="nav-item"><a class="nav-link" href="/spsl.html" id="pembagian">Pembagian & Lapangan</a></li>
+          <li class="nav-item"><a class="nav-link" href="/sifat_spsl.html" id="sifat">Sifat Subring</a></li>
+          <li class="nav-item"><a class="nav-link" href="/ideal.html">Ideal</a></li>
+          <li class="nav-item"><a class="nav-link" href="/penutup.html">Penutup</a></li>
+          <li class="nav-item"><a class="nav-link" href="/video.html">Video</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content: Penutup -->
+<!-- Main Content: Penutup -->
+<section id="penutup" class="py-5">
+  <div class="container">
+      <h2 class="text-center mb-4">PENUTUP</h2>
+      <div class="container-konten">
+          <!-- Rangkuman: Gambar dan Teks -->
+          <div class="row align-items-center">
+              <!-- Kolom Gambar (Foto Baru) -->
+              <div class="col-md-6 text-center">
+                  <img src="assets/penutup.jpg" alt="Foto Penutup Baru" class="img-fluid rounded" style="width: 100%; max-height: auto;">
+              </div>
+              <!-- Kolom Teks Penjelasan Baru -->
+              <div class="col-md-6" style="text-align: justify;">
+                  <p>
+                    Pembahasan ini menguraikan secara mendalam tentang <em>subring</em>, <em>sublapangan</em>, dan <em>ideal</em> dalam struktur aljabar serta peran pentingnya dalam teori gelanggang. Subring adalah himpunan bagian dari ring yang mempertahankan operasi dasar seperti penjumlahan dan perkalian, sehingga tetap memiliki struktur aljabar sesuai dengan ring induknya. Sublapangan merupakan subring yang memenuhi syarat tambahan, seperti keberadaan invers perkalian, sehingga membentuk struktur lebih kuat, yaitu lapangan, yang sering digunakan dalam teori bilangan dan aljabar linear. Ideal adalah subring khusus yang tertutup terhadap operasi dengan unsur dalam ring, menjadikannya alat fundamental dalam membangun struktur baru, termasuk gelanggang hasil bagi.
+                  </p>
+              </div>
+          </div>
+          <br>
+          <!-- Card untuk Kesimpulan Baru -->
+          <div class="card mb-4 shadow-sm">
+              <div class="card-header bg-blue text-white">
+                  <h5 class="mb-0">Kesimpulan</h5>
+              </div>
+              <div class="card-body">
+                  <p class="card-text text-justify">
+                      Dari pembahasan yang disampaikan, dapat disimpulkan bahwa pemahaman mengenai <em>subring</em>, <em>sublapangan</em>, dan <em>ideal</em> sangat penting dalam studi aljabar. Konsep-konsep ini tidak hanya meningkatkan pemahaman teori matematika abstrak, tetapi juga memiliki aplikasi praktis dalam penyelesaian masalah matematika dan pengembangan ilmu pengetahuan.
+                  </p>
+              </div>
+          </div>
+          <!-- Card untuk Saran -->
+          <div class="card mb-4 shadow-sm">
+              <div class="card-header bg-blue text-white">
+                  <h5 class="mb-0">Saran</h5>
+              </div>
+              <div class="card-body">
+                  <p class="card-text text-justify">
+                      Untuk mendalami materi ini, disarankan melakukan eksplorasi melalui studi kasus, diskusi kelompok, serta latihan soal. Pemanfaatan media pembelajaran interaktif dan referensi terbaru juga akan sangat membantu dalam memperdalam pemahaman dan penerapan konsep-konsep yang telah dibahas.
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container px-4" style="margin-top: -2rem; margin-bottom: -2rem;">
+      <p class="m-0 text-center text-white">© Kelompok 8 - PSPM D 2022 <br>Struktur Aljabar - Subring dan Ideal</p>
+    </div>
+  </footer>
+  <!-- Bootstrap core JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS -->
+  <script src="js/scripts.js"></script>
+  <script>
+    // Fungsi untuk mengubah teks menu berdasarkan ukuran layar
+    function updateMenuText() {
+      const pembagian = document.getElementById('pembagian');
+      const sifat = document.getElementById('sifat');
+      if (window.innerWidth <= 990) {
+        pembagian.textContent = 'Subring Pembagian dan Sub Lapangan';
+        sifat.textContent = 'Sifat-sifat Subring dan Sublapangan';
+      } else {
+        pembagian.textContent = 'Pembagian & Lapangan';
+        sifat.textContent = 'Sifat Subring';
+      }
+    }
+    window.addEventListener('resize', updateMenuText);
+    updateMenuText();
+  </script>
+  <script>
+    // Daftar simbol matematika untuk efek animasi
+    const mathSymbols = ["π", "∑", "√", "∞", "∆", "∫", "≈", "≠", "λ", "θ"];
+  
+    function createFallingSymbol() {
+      const symbol = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+      const span = document.createElement('span');
+      span.classList.add('falling-symbol');
+      span.textContent = symbol;
+      span.style.left = Math.random() * window.innerWidth + "px";
+      span.style.fontSize = (20 + Math.random() * 10) + "px";
+      span.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(span);
+      setTimeout(() => { span.remove(); }, parseFloat(span.style.animationDuration) * 1000);
+    }
+    setInterval(createFallingSymbol, 300);
+  </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Makalah Subring dan Ideal</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .bg-blue {
+            background-color: #0D253F;
+        }
+        .falling-symbol {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            color: #fff;
+            user-select: none;
+            pointer-events: none;
+            animation-name: fall;
+            animation-timing-function: linear;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        p { font-size: 1.2rem; margin-bottom: 1px; }
+        hr { width: 100%; }
+        .navbar-nav .nav-item { margin-right: 10px; }
+        .navbar-nav .nav-link {
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .navbar-nav .nav-link:hover::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        header { background-color: #0D253F; padding: 20px 0; }
+        .header-content { text-align: center; color: white; }
+        .table-container { display: flex; justify-content: center; margin-top: 10px; }
+        .custom-table { width: 50%; background: transparent; color: white; border-collapse: collapse; }
+        .custom-table td { padding: 5px; text-align: left; }
+        .custom-table td:last-child { text-align: right; }
+        .navbar-nav .nav-link.active { font-weight: bold; color: #fff; }
+        .navbar-nav .nav-link.active::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+        @media (max-width: 900px) {
+            .container-konten { margin-left: 1rem; margin-right: 1rem; }
+        }
+        .math {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+        }
+        .card-text { font-size: 1.1rem; }
+    </style>
+</head>
+<body id="page-top">
+   <!-- Header-->
+   <header class="bg-gradient text-white">
+    <div class="container px-4 header-content" id="headerContent">
+      <!-- Header Minimal: selalu tampil -->
+      <div class="header-minimal" id="headerMinimal" style="cursor: pointer;">
+        <h1 class="fw-bolder">STRUKTUR ALJABAR</h1>
+        <h2 class="fw-bolder">Subring dan Ideal</h2>
+        <hr>
+      </div>
+      <!-- Header Ekstra: informasi tambahan -->
+      <div class="extra-content">
+        <p class="lead">Dosen Pengampu: <br>Ade Andriani, S.Pd., M.Pd.</p>
+        <p class="lead" style="padding-top: 1rem;">Kelompok 8 - PSPM D 2022</p>
+        <p>Rona Uli Siringo ringo (4223311055)</p>
+        <p>Ingrid Simangunsong (4223311041)</p>
+        <p>Miranda Br Purba (4223311044)</p>
+      </div>
+    </div>
+  </header>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+        <div class="container px-4">
+            <a class="navbar-brand" href="/">Subring dan Ideal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/subring.html">Subring</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/spsl.html" id="pembagian">Pembagian & Lapangan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/sifat_spsl.html" id="sifat">Sifat Subring</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/ideal.html">Ideal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/penutup.html">Penutup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/video.html">Video</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Main Content -->
+    <section id="materi" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">SUBRING</h2>
+            <div class="container-konten">
+                <!-- Card: Definisi A-1 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Definisi A-1</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            Suatu himpunan bagian \( S \) dari suatu ring \( R \) dikatakan sebagai <em>subring</em> dari \( R \) apabila \( S \), dengan operasi penjumlahan dan perkalian yang diwarisi dari \( R \), memenuhi seluruh sifat-sifat sebuah ring. Dalam setiap ring, terdapat minimal dua subring, yaitu himpunan \( \{0\} \) dan ring itu sendiri \( R \). Himpunan \( \{0\} \) dan \( R \) disebut <em>subring tak sejati</em>, sedangkan subring yang berbeda dari kedua himpunan tersebut disebut <em>subring sejati</em>.
+                        </p>
+                        <p class="card-text text-justify">
+                            Perlu diingat bahwa konsep <em>subgroup</em> dalam teori grup memiliki kesamaan. Misalkan \( G \) merupakan suatu grup, maka suatu himpunan tidak kosong \( H \subseteq G \) disebut subgroup jika untuk setiap \( a,b \in H \) berlaku \( ab^{-1} \in H \). Karena pada suatu ring \( R \) (dengan \( (R,+) \) merupakan grup), kriteria tersebut juga dapat diterapkan untuk membuktikan bahwa suatu himpunan bagian \( S \subseteq R \) merupakan subring dari \( R \).
+                        </p>
+                    </div>
+                </div>
+                <!-- Card: Teorema A-1 -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Teorema A-1</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            Suatu himpunan \( S \) yang tidak kosong merupakan subring dari suatu ring \( R \) jika dan hanya jika:
+                        </p>
+                        <ul>
+                            <li>\( \forall\, x,y \in S: x - y \in S \) (tertutup terhadap pengurangan),</li>
+                            <li>\( \forall\, x,y \in S: x \cdot y \in S \) (tertutup terhadap perkalian).</li>
+                        </ul>
+                        <p class="card-text text-justify">
+                            <strong>Bukti:</strong><br>
+                            (⇒) Jika \( S \) adalah subring dari \( R \), maka \( S \) merupakan ring dengan operasi yang sama seperti pada \( R \), sehingga harus tertutup terhadap penjumlahan dan setiap elemen memiliki invers aditif. Dengan demikian, untuk setiap \( x,y \in S \) diperoleh:
+                        </p>
+                        <ul>
+                            <li>\( x + ( -y ) = x - y \in S \),</li>
+                            <li>\( x \cdot y \in S \).</li>
+                        </ul>
+                        <p class="card-text text-justify">
+                            (⇐) Sebaliknya, jika \( S \) adalah himpunan bagian tidak kosong yang memenuhi kedua kondisi tersebut, maka \( S \) juga tertutup terhadap penjumlahan, karena untuk setiap \( x,y \in S \) dapat dituliskan \( x+y=x-(-y) \in S \). Keberadaan elemen identitas aditif terbukti dengan memilih sembarang \( x \in S \) sehingga \( x-x=0 \in S \), dan keberadaan invers aditif karena untuk setiap \( x \in S \) berlaku \( 0-x=-x \in S \). Dengan demikian, \( S \) memenuhi seluruh syarat sebagai subring dari \( R \).
+                        </p>
+                    </div>
+                </div>
+                <!-- Card: Contoh-contoh -->
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header bg-blue text-white">
+                        <h5 class="mb-0">Contoh-contoh</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-justify">
+                            <strong>Contoh 1:</strong> Pertimbangkan himpunan bilangan bulat \( \mathbb{Z} \) dengan operasi penjumlahan dan perkalian konvensional. Himpunan \( 3\mathbb{Z} = \{ 3z \mid z \in \mathbb{Z} \} \) merupakan subring dari \( \mathbb{Z} \).<br>
+                            <strong>Bukti:</strong> Misalkan \( x,y \in 3\mathbb{Z} \), sehingga terdapat bilangan bulat \( x_1 \) dan \( y_1 \) dengan \( x = 3x_1 \) dan \( y = 3y_1 \). Maka:
+                        </p>
+                        <ul>
+                            <li>\( x-y=3x_1-3y_1=3(x_1-y_1) \in 3\mathbb{Z} \),</li>
+                            <li>\( x \cdot y = (3x_1)(3y_1)=9x_1y_1=3(3x_1y_1) \in 3\mathbb{Z} \).</li>
+                        </ul>
+                        <p class="card-text text-justify">
+                            Berdasarkan Teorema A-1, dapat disimpulkan bahwa \( 3\mathbb{Z} \) merupakan subring dari \( \mathbb{Z} \).
+                        </p>
+                        <p class="card-text text-justify">
+                            <strong>Contoh 2:</strong> Secara umum, himpunan \( n\mathbb{Z} = \{nz \mid z \in \mathbb{Z}\} \) untuk suatu \( n \in \mathbb{Z}^{+} \) merupakan subring dari \( \mathbb{Z} \).
+                        </p>
+                        <p class="card-text text-justify">
+                            <strong>Contoh 3:</strong> Pertimbangkan ring matriks \( M_2(\mathbb{R}) \) dengan operasi penjumlahan dan perkalian matriks. Ambillah himpunan
+                            \[
+                            N = \left\{ 
+                                \begin{pmatrix} 
+                                    x & 0 \\ 
+                                    0 & y 
+                                \end{pmatrix} \,\bigg|\, x, y \in \mathbb{Z} 
+                            \right\}
+                            \]
+                            yang dapat dibuktikan sebagai subring dari \( M_2(\mathbb{R}) \).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container px-4" style="margin-top: -2rem; margin-bottom: -2rem;">
+            <p class="m-0 text-center text-white">© Kelompok 8 - PSPM D 2022 <br>Struktur Aljabar - Subring dan Ideal</p>
+        </div>
+    </footer>
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS -->
+    <script src="js/scripts.js"></script>
+    <script>
+        // Simpan teks awal dan teks panjang
+        let pembagianText = 'Pembagian & Lapangan';
+        let pembagianFullText = 'Subring Pembagian dan Sub Lapangan';
+        let sifatText = 'Sifat Subring';
+        let sifatFullText = 'Sifat-sifat Subring dan Sublapangan';
+    
+        // Ambil elemen
+        let pembagian = document.getElementById('pembagian');
+        let sifat = document.getElementById('sifat');
+    
+        // Set atribut title untuk tooltip
+        pembagian.setAttribute('title', pembagianText);
+        sifat.setAttribute('title', sifatText);
+    
+        // Fungsi untuk mengubah teks berdasarkan ukuran layar
+        function updateMenuText() {
+            if (window.innerWidth <= 990) {
+                pembagian.textContent = pembagianFullText;
+                sifat.textContent = sifatFullText;
+            } else {
+                pembagian.textContent = pembagianText;
+                sifat.textContent = sifatText;
+            }
+        }
+    
+        // Event listener untuk resize window
+        window.addEventListener('resize', updateMenuText);
+    
+        // Set default teks saat halaman pertama kali dimuat
+        updateMenuText();
+    
+        // Hover event hanya jika ukuran layar lebih dari 990px
+        if (window.innerWidth > 990) {
+            pembagian.addEventListener('mouseover', function () {
+                this.textContent = pembagianFullText;
+            });
+            pembagian.addEventListener('mouseout', function () {
+                this.textContent = pembagianText;
+            });
+            sifat.addEventListener('mouseover', function () {
+                this.textContent = sifatFullText;
+            });
+            sifat.addEventListener('mouseout', function () {
+                this.textContent = sifatText;
+            });
+        }
+    </script>
+    <script>
+        // Daftar simbol matematika
+        const mathSymbols = ["π", "∑", "√", "∞", "∆", "∫", "≈", "≠", "λ", "θ"];
+      
+        function createFallingSymbol() {
+            const symbol = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+            const span = document.createElement('span');
+            span.classList.add('falling-symbol');
+            span.textContent = symbol;
+            span.style.left = Math.random() * window.innerWidth + "px";
+            span.style.fontSize = (20 + Math.random() * 10) + "px";
+            span.style.animationDuration = (5 + Math.random() * 5) + "s";
+            document.body.appendChild(span);
+            setTimeout(() => { span.remove(); }, parseFloat(span.style.animationDuration) * 1000);
+        }
+        setInterval(createFallingSymbol, 300);
+    </script>
+</body>
+</html>

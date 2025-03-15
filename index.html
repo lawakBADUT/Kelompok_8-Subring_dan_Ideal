@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Makalah Subring dan Ideal</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            .falling-symbol {
+              position: fixed;
+              top: -50px;
+              font-size: 24px;
+              color: #fff; /* Warna putih agar kontras, bisa diubah sesuai kebutuhan */
+              user-select: none;
+              pointer-events: none;
+              animation-name: fall;
+              animation-timing-function: linear;
+            }
+          
+            @keyframes fall {
+              0% {
+                transform: translateY(0);
+                opacity: 1;
+              }
+              100% {
+                transform: translateY(100vh);
+                opacity: 0;
+              }
+            }
+         
+            p{
+                font-size: 1.2rem;
+                margin-bottom: 1px;
+            }
+            hr{
+                width:100%;
+            }
+            .navbar-nav .nav-item {
+                margin-right: 10px;
+            }
+            .navbar-nav .nav-link {
+                position: relative;
+                padding-bottom: 5px;
+            }
+            .navbar-nav .nav-link:hover::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 2px;
+                background-color: white;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+            header {
+                background-color: #0D253F;
+                padding: 20px 0;
+            }
+            .header-content {
+                text-align: center;
+                color: white;
+            }
+            .table-container {
+                display: flex;
+                justify-content: center;
+                margin-top: 10px;
+            }
+            .custom-table {
+                width: 50%;
+                background: transparent;
+                color: white;
+                border-collapse: collapse;
+            }
+            .custom-table td {
+                padding: 5px;
+                text-align: left;
+            }
+            .custom-table td:last-child {
+                text-align: right;
+            }
+
+             /* Gaya untuk link aktif */
+            .navbar-nav .nav-link.active {
+                font-weight: bold;
+                color: #fff;
+            }
+            
+            .navbar-nav .nav-link.active::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 2px;
+                background-color: white;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+
+            @media (max-width: 900px) {
+                .container-konten {
+                margin-left: 1rem;
+                margin-right: 1rem;
+                }
+            }
+  
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Header-->
+    <header class="bg-gradient text-white">
+        <div class="container px-4 header-content" id="headerContent">
+          <!-- Header Minimal: selalu tampil -->
+          <div class="header-minimal" id="headerMinimal" style="cursor: pointer;">
+            <h1 class="fw-bolder">STRUKTUR ALJABAR</h1>
+            <h2 class="fw-bolder">Subring dan Ideal</h2>
+            <hr>
+          </div>
+          <!-- Header Ekstra: informasi tambahan -->
+          <div class="extra-content">
+            <p class="lead">Dosen Pengampu: <br>Ade Andriani, S.Pd., M.Pd.</p>
+            <p class="lead" style="padding-top: 1rem;">Kelompok 8 - PSPM D 2022</p>
+            <p>Rona Uli Siringo ringo (4223311055)</p>
+            <p>Ingrid Simangunsong (4223311041)</p>
+            <p>Miranda Br Purba (4223311044)</p>
+          </div>
+        </div>
+      </header>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+            <div class="container px-4">
+              <a class="navbar-brand" href="/">Subring dan Ideal</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span
+                  class="navbar-toggler-icon"></span></button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link" href="/">Beranda</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/subring.html">Subring</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/spsl.html" id="pembagian">Pembagian &amp; Lapangan</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/sifat_spsl.html" id="sifat">Sifat Subring</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/ideal.html">Ideal</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/penutup.html">Penutup</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/video.html">Video</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <section id="pengantar" class="py-5">
+            <div class="container">
+                 <!-- Judul Besar -->
+              <h2 class="text-center mb-4">PENGANTAR</h2>
+                <div class="container-konten">
+                       <!-- Baris untuk teks pengantar dan gambar -->
+                    <div class="row align-items-center">
+                    <!-- Kolom Teks Pengantar -->
+                        <div class="col-md-6" style="text-align:justify">
+                        <p style="margin-bottom: 1rem;">
+                            Subring merupakan himpunan bagian yang tertutup terhadap operasi
+                            penjumlahan dan perkalian, dan memiliki elemen identitas jika himpunan
+                            aslinya juga memilikinya (Fraleigh, 2003). Ketika suatu subring memenuhi
+                            syarat tambahan yang menjadikannya sebagai struktur yang lebih kuat, maka
+                            disebut sublapangan, yang banyak digunakan dalam berbagai cabang matematika
+                            seperti teori bilangan dan aljabar (Dummit &amp; Foote, 2016). <br>
+                            Selain itu, ada konsep ideal, yaitu himpunan bagian khusus yang memiliki
+                            sifat tertentu terkait dengan operasi yang ada (Sudrajat, 2011). Ideal
+                            memiliki peran penting dalam membentuk struktur baru yang memungkinkan kita
+                            untuk memahami hubungan antar elemen dalam suatu himpunan dengan lebih
+                            mendalam (Susanto, 2014).
+                        </p>
+                        </div>
+                
+                        <!-- Kolom Gambar -->
+                        <div class="col-md-6 text-center gambar">
+                        <!-- Ubah src sesuai lokasi gambar Anda -->
+                        <img src="assets/pengantar.jpg" alt="Gambar Ilustrasi" class="img-fluid rounded" style="max-width: 100%; height: auto;">
+                        </div>
+                    </div>
+                
+                    <!-- Sedikit jarak sebelum paragraf akhir -->
+                    <div class="my-4"></div>
+                
+                    <!-- Paragraf berisi "Masalah" dan "Tujuan" secara pasif -->
+                    <p style="text-align:justify">
+                        Melalui penulisan ini, dijelaskan definisi subring, sublapangan, dan ideal, 
+                        beserta syarat yang harus dipenuhi agar suatu himpunan bagian dapat 
+                        dikategorikan sebagai salah satunya. Teorema-teorema yang berkaitan dengan 
+                        subring, sublapangan, dan ideal, beserta pembuktiannya, turut disampaikan 
+                        untuk memberikan pemahaman yang lebih komprehensif. Penerapan definisi dan 
+                        teorema tersebut diuraikan dalam beberapa contoh aljabar. Penulisan ini 
+                        dilakukan dengan tujuan untuk memenuhi salah satu tugas mata kuliah Struktur 
+                        Aljabar, serta menyajikan pemaparan definisi, syarat, dan teorema yang 
+                        berkaitan dengan subring, sublapangan, dan ideal secara mendalam.
+                    </p>
+                    </div>
+                 </div>
+          </section>
+          
+        <footer class="py-5 bg-dark">
+            <div class="container px-4" style="margin-top: -2rem; margin-bottom: -2rem;"><p class="m-0 text-center text-white">© Kelompok 8 - PSPM D 2022 <br>Struktur Aljabar - Subring dan Ideal</p>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        
+        <script>
+            // Simpan teks awal dan teks panjang
+            let pembagianText = 'Pembagian & Lapangan';
+            let pembagianFullText = 'Subring Pembagian dan Sub Lapangan';
+            
+            let sifatText = 'Sifat Subring';
+            let sifatFullText = 'Sifat-sifat Subring dan Sublapangan';
+        
+            // Ambil elemen
+            let pembagian = document.getElementById('pembagian');
+            let sifat = document.getElementById('sifat');
+        
+            // Set atribut title untuk tooltip
+            pembagian.setAttribute('title', pembagianText);
+            sifat.setAttribute('title', sifatText);
+        
+            // Fungsi untuk mengubah teks berdasarkan ukuran layar
+            function updateMenuText() {
+                if (window.innerWidth <= 990) {
+                    pembagian.textContent = pembagianFullText;
+                    sifat.textContent = sifatFullText;
+                } else {
+                    pembagian.textContent = pembagianText;
+                    sifat.textContent = sifatText;
+                }
+            }
+        
+            // Event listener untuk resize window
+            window.addEventListener('resize', updateMenuText);
+        
+            // Set default teks saat halaman pertama kali dimuat
+            updateMenuText();
+        
+            // Hover event hanya jika ukuran layar lebih dari 990px
+            if (window.innerWidth > 990) {
+                pembagian.addEventListener('mouseover', function () {
+                    this.textContent = pembagianFullText;
+                });
+                pembagian.addEventListener('mouseout', function () {
+                    this.textContent = pembagianText;
+                });
+        
+                sifat.addEventListener('mouseover', function () {
+                    this.textContent = sifatFullText;
+                });
+                sifat.addEventListener('mouseout', function () {
+                    this.textContent = sifatText;
+                });
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Dapatkan path dari URL
+                    let path = window.location.pathname;
+                    // Jika berada di root atau index, default ke beranda
+                    if (path === "/" || path === "/index.html") {
+                      path = "/beranda.html";
+                    }
+                    
+                    // Ambil semua link navbar
+                    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+                    
+                    navLinks.forEach(function(link) {
+                      // Cocokkan href link dengan path yang didapat
+                      if (link.getAttribute('href') === path) {
+                        link.classList.add('active');
+                      }
+                    });
+                });
+            }
+        </script>
+        <script>
+            // Daftar simbol matematika
+            const mathSymbols = ["π", "∑", "√", "∞", "∆", "∫", "≈", "≠", "λ", "θ"];
+          
+            function createFallingSymbol() {
+              const symbol = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
+              const span = document.createElement('span');
+              span.classList.add('falling-symbol');
+              span.textContent = symbol;
+              
+              // Posisi horizontal acak
+              span.style.left = Math.random() * window.innerWidth + "px";
+              
+              // Ukuran font acak antara 20px dan 40px
+              const fontSize = 20 + Math.random() * 10;
+              span.style.fontSize = fontSize + "px";
+              
+              // Durasi animasi acak antara 5 dan 10 detik
+              const duration = 5 + Math.random() * 5;
+              span.style.animationDuration = duration + "s";
+              
+              // Tambahkan elemen ke body
+              document.body.appendChild(span);
+              
+              // Hapus elemen setelah animasi selesai
+              setTimeout(() => {
+                span.remove();
+              }, duration * 1000);
+            }
+            
+            setInterval(createFallingSymbol, 300);
+
+            
+          </script>
+    </body>
+</html>
